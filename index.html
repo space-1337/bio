@@ -1,0 +1,119 @@
+<div class="video-wrapper">
+  <video id="bg-video" loop playsinline muted>
+    <source src="videoplayback.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay">
+    <span id="click-text">Click to reveal</span>
+    <img id="avatar" src="1.png" alt="avatar">
+    <div id="role-text">Reverse Engineer, C++ developer</div>
+  </div>
+</div>
+
+<script>
+  const video = document.getElementById('bg-video');
+  const overlay = document.querySelector('.overlay');
+  const clickText = document.getElementById('click-text');
+  const avatar = document.getElementById('avatar');
+  const roleText = document.getElementById('role-text');
+
+  clickText.addEventListener('click', () => {
+    video.currentTime = 2.1;
+    video.muted = false;
+    video.volume = 0.05;
+    video.play();
+    video.style.filter = 'none';
+
+    clickText.style.display = 'none';
+
+    overlay.style.background = 'rgba(0,0,0,0.7)';
+    overlay.style.borderRadius = '12px';
+    overlay.style.width = '500px';
+    overlay.style.height = '250px';
+    overlay.style.transform = 'translate(-50%, -50%)';
+    overlay.style.pointerEvents = 'none';
+
+    avatar.style.display = 'block';
+    avatar.style.transform = 'scale(1.5) translateY(-20%)';
+
+    roleText.style.display = 'block';
+  });
+</script>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#bg-video {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  filter: blur(20px);
+  transition: filter 0.5s ease;
+  z-index: -1;
+}
+
+.overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 70px;
+  overflow: hidden;
+  background: transparent;
+  z-index: 1;
+  transition: all 0.5s ease;
+}
+
+#click-text {
+  font-family: Arial, sans-serif;
+  font-size: 2em;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+#avatar {
+  display: none;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+  transition: transform 0.5s ease;
+}
+
+#role-text {
+  display: none;
+  margin-top: 15px;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  font-size: 1.3em;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  text-shadow:
+    0 1px 2px rgba(255,255,255,0.6),
+    0 2px 4px rgba(255,255,255,0.4),
+    0 4px 8px rgba(255,255,255,0.2);
+}
+</style>
